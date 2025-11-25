@@ -1,0 +1,54 @@
+import { SignUp } from '@clerk/nextjs'
+
+export default function Page() {
+  return (
+    <div className="lg:grid lg:grid-cols-12 lg:gap-x-0">
+      <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
+        <img
+          alt="Night"
+          src="https://images.unsplash.com/photo-1617195737496-bc30194e3597?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+          className="absolute inset-0 h-full w-full object-cover opacity-80"
+        />
+
+        <div className="hidden lg:relative lg:block lg:p-12">
+          <a className="block text-white" href="#">
+            <span className="sr-only">Home</span>
+            <img src="https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJwd2JIM1BIdWFRREI1U1d4SXpPTHJXTWU2eSJ9?width=200" alt="Home" className="h-10 w-auto" />
+          </a>
+
+          <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
+            Welcome to SkillPrep AI ✨
+          </h2>
+
+          <p className="mt-4 leading-relaxed text-white/90">
+            Master your interview. Own your future.
+          </p>
+        </div>
+      </section>
+
+      <main
+        className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
+      >
+        <div className="max-w-xl lg:max-w-3xl">
+          <div className="relative -mt-16 block lg:hidden">
+            <a
+              className="inline-flex size-16 items-center justify-center rounded-full bg-white text-blue-600 sm:size-20"
+              href="#"
+            >
+              <span className="sr-only">Home</span>
+              <img src="https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJwd2JIM1BIdWFRREI1U1d4SXpPTHJXTWU2eSJ9?width=200" alt="Home" />
+            </a>
+            <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
+              Welcome to SkillPrep AI
+            </h1>
+
+            <p className="mt-4 leading-relaxed text-gray-500">
+              Master your interview. Own your future.
+            </p>
+          </div>
+          <SignUp />
+        </div>
+      </main>
+    </div>
+  )
+}

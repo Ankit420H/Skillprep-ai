@@ -1,0 +1,21 @@
+import { NextResponse } from 'next/server';
+import { db } from '@/core/db/db';
+import { MockInterview } from '@/core/db/schema';
+import { desc, eq } from 'drizzle-orm';
+
+export async function GET(req) {
+    try {
+        const { searchParams } = new URL(req.url);
+        const userEmail = searchParams.get('userEmail');
+
+        const result = await db
+            .select()
+            .from(MockInterview)
+            .where(eq(MockInterview.createdBy, userEmail))
+            .orderBy(desc(MockInterview.id));
+
+        return NextResponse.json(result);
+    } catch (error) {
+        return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+}
