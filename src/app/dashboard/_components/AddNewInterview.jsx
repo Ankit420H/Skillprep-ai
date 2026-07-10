@@ -15,7 +15,7 @@ import {
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { Plus, Sparkles, LoaderCircle } from "lucide-react";
-import { v4 as uuidv4 } from "uuid";
+
 import { toast } from "sonner";
 
 const ROLES = [
@@ -97,7 +97,7 @@ Return only valid JSON (no markdown code fences). Example output:
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          mockId: uuidv4(),
+          mockId: crypto.randomUUID(),
           jsonMockResp: JSON.stringify(questions),
           jobPosition: position,
           jobDesc: description,

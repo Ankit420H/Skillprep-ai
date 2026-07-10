@@ -1,3 +1,4 @@
+import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
@@ -44,6 +45,11 @@ async function tryModel(genAI, modelId, prompt, retries = 2) {
 
 export async function POST(req) {
     try {
+        const { userId } = auth();
+        if (!userId) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
         const { prompt } = await req.json();
 
         if (!prompt) {

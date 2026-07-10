@@ -4,7 +4,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { Mic, StopCircle, Loader2, Camera, CameraOff } from "lucide-react";
 import { toast } from "sonner";
 import { useUser } from "@clerk/nextjs";
-import moment from "moment";
 import Webcam from "react-webcam";
 
 const RecordAnswerSection = ({
@@ -103,7 +102,7 @@ const RecordAnswerSection = ({
         feedback: feedback?.feedback,
         rating: feedback?.rating,
         userEmail: user?.primaryEmailAddress?.emailAddress,
-        createdAt: moment().format("DD-MM-YYYY"),
+        createdAt: `${String(new Date().getDate()).padStart(2, '0')}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${new Date().getFullYear()}`,
       };
 
       await fetch("/api/save-answer", {

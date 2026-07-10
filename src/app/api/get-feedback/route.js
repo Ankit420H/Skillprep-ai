@@ -1,3 +1,4 @@
+import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import { db } from '@/core/db/db';
 import { UserAnswer } from '@/core/db/schema';
@@ -5,6 +6,11 @@ import { eq } from 'drizzle-orm';
 
 export async function GET(req) {
     try {
+        const { userId } = auth();
+        if (!userId) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
         const { searchParams } = new URL(req.url);
         const mockId = searchParams.get('mockId');
 

@@ -1,90 +1,76 @@
+# Skillprep-ai
 
-# Full Stack AI Mock Interview App
+**An enterprise-grade, full-stack AI Mock Interview Platform.**
 
-**Welcome to the Full Stack AI Mock Interview App!**  
-This project is designed to help developers enhance their skills through AI-driven mock interviews, providing real-time feedback to simulate a realistic interview experience.
+Skillprep-ai allows software engineers to simulate technical and behavioral interviews in real-time. By leveraging Google's Gemini AI, the platform generates custom-tailored interview questions based on the candidate's target role, experience level, and job description, then provides instant, actionable feedback on their video/audio responses.
 
-## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Getting Started](#getting-started)
-  - [Installation](#installation)
-  - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+## 🚀 Features
 
-## Overview
-The Full Stack AI Mock Interview App allows users to practice technical and behavioral interview questions in an interactive environment. The app generates custom questions based on user preferences and delivers instant feedback on answers to help users improve their interview skills.
+- **AI-Powered Generation:** Dynamically generates interview questions using Google Gemini AI based on user profiles.
+- **Real-Time Audio & Video:** Integrated `react-webcam` and WebRTC for speech-to-text recording.
+- **Instant AI Feedback:** Answers are analyzed in real-time to provide a rating (out of 10) and constructive feedback.
+- **Enterprise Authentication:** Fully secured API and user management powered by Clerk.
+- **Serverless Database:** Highly scalable Postgres database hosted on Neon, managed seamlessly via Drizzle ORM.
+- **Modern UI/UX:** Built with Tailwind CSS and Radix UI primitives for a sleek, accessible, dark-mode ready interface.
 
-## Features
-- **AI-Driven Questions**: Get custom-tailored interview questions based on your profile and feedback.
-- **User Authentication**: Secure login and signup using Clerk.
-- **Real-Time Feedback**: Answer interview questions and receive immediate feedback with the help of Gemini AI.
-- **Interactive UI**: A responsive, user-friendly interface built with React.
-- **Data Persistence**: User data and interview history managed through Drizzle ORM.
+## 🏗️ Architecture & Tech Stack
 
-## Technologies Used
-- **[Next.js](https://nextjs.org/)**: Framework for server-rendered React applications.
-- **[React](https://reactjs.org/)**: JavaScript library for building user interfaces.
-- **[Drizzle ORM](https://drizzle.team/)**: ORM for managing database interactions.
-- **[Gemini AI](https://gemini.ai/)**: AI API for generating interview questions and analyzing answers.
-- **[Clerk](https://clerk.dev/)**: Authentication and user management.
+- **Framework:** Next.js 14 (App Router)
+- **Language:** JavaScript / React 18
+- **Styling:** Tailwind CSS + Shadcn UI (Radix)
+- **Database:** Neon (Serverless Postgres) + Drizzle ORM
+- **Authentication:** Clerk
+- **AI Integration:** `@google/generative-ai` (Gemini API)
 
-## Getting Started
+## 🔒 Security Posture
+
+- **Route Protection:** All Next.js API routes are protected server-side via Clerk's `auth()` helper to prevent unauthorized database mutations.
+- **Environment Isolation:** Secrets and API keys are strictly loaded via `.env.local` and excluded from source control.
+
+## 🛠️ Getting Started
+
+### Prerequisites
+- Node.js 18+
+- A Neon Database URL
+- A Clerk Publishable & Secret Key
+- A Google Gemini API Key
 
 ### Installation
-To get started with the project, follow these steps:
 
-1. Clone the repository:
+1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/ai-mock-interview.git
+   git clone https://github.com/Ankit420H/Skillprep-ai.git
+   cd Skillprep-ai
    ```
 
-2. Navigate to the project directory:
-   ```bash
-   cd full-stack-ai-mock-interview-app
-   ```
-
-3. Install the dependencies:
+2. **Install dependencies:**
    ```bash
    npm install
    ```
 
-### Usage
-1. Start the development server:
+3. **Configure Environment Variables:**
+   Create a `.env.local` file in the root directory:
+   ```env
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_key
+   CLERK_SECRET_KEY=your_clerk_secret
+   NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+   NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+   NEXT_PUBLIC_DRIZZLE_DB_URL=your_neon_db_url
+   NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key
+   ```
+
+4. **Initialize Database Schema:**
+   ```bash
+   npm run db:push
+   ```
+
+5. **Start the Development Server:**
    ```bash
    npm run dev
    ```
 
-2. Open your browser and visit [http://localhost:3000](http://localhost:3000) to see the app in action!
+Open [http://localhost:3000](http://localhost:3000) to view the application in your browser.
 
-## Contributing
-We welcome contributions! Please follow these steps to contribute:
+## 📄 License
 
-1. **Fork the repository**: Click the "Fork" button at the top right corner of this repository.
-2. **Clone your fork**:
-   ```bash
-   git clone https://github.com/yourusername/full-stack-ai-mock-interview-app.git
-   ```
-3. **Create a new branch**:
-   ```bash
-   git checkout -b your-feature-branch
-   ```
-4. **Make your changes**: Add features or fix bugs.
-5. **Commit your changes**:
-   ```bash
-   git commit -m "Describe your changes"
-   ```
-6. **Push your branch**:
-   ```bash
-   git push origin your-feature-branch
-   ```
-7. **Create a pull request**: Go to the original repository and open a pull request.
-
-For more details, please refer to the [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-
+This project is licensed under the MIT License.
