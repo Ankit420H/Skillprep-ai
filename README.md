@@ -55,7 +55,7 @@ Skillprep-ai allows software engineers to simulate technical and behavioral inte
    CLERK_SECRET_KEY=your_clerk_secret
    NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
    NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-   NEXT_PUBLIC_DRIZZLE_DB_URL=your_neon_db_url
+   DATABASE_URL=your_neon_db_url
    NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key
    ```
 
