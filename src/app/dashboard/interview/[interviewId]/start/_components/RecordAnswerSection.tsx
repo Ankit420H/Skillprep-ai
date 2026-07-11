@@ -7,9 +7,35 @@ import { useUser } from "@clerk/nextjs";
 import Webcam from "react-webcam";
 import { MockInterview, Question } from "@/types";
 
+interface SpeechRecognitionEvent {
+  resultIndex: number;
+  results: {
+    isFinal: boolean;
+    length: number;
+    [key: number]: { transcript: string };
+  }[];
+}
+
+interface SpeechRecognitionErrorEvent {
+  error: string;
+}
+
+interface SpeechRecognition extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  start(): void;
+  stop(): void;
+  onresult: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => void) | null;
+  onerror: ((this: SpeechRecognition, ev: SpeechRecognitionErrorEvent) => void) | null;
+  onend: ((this: SpeechRecognition, ev: Event) => void) | null;
+}
+
 declare global {
   interface Window {
-    webkitSpeechRecognition: unknown;
+    webkitSpeechRecognition: {
+      new (): SpeechRecognition;
+    };
   }
 }
 
@@ -31,7 +57,7 @@ const RecordAnswerSection = ({
   const [loading, setLoading] = useState(false);
   const [recording, setRecording] = useState(false);
   const [webcam, setWebcam] = useState(false);
-  const recognitionRef = useRef<unknown>(null);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined" && "webkitSpeechRecognition" in window) {
@@ -41,7 +67,7 @@ const RecordAnswerSection = ({
       rec.interimResults = true;
       rec.lang = "en-US";
 
-      rec.onresult = (event: { resultIndex: number; results: { isFinal: boolean; [key: number]: { transcript: string } }[] }) => {
+      rec.onresult = (event) => {
         let transcript = "";
         for (let i = event.resultIndex; i < event.results.length; ++i) {
           if (event.results[i].isFinal) {
@@ -53,7 +79,7 @@ const RecordAnswerSection = ({
         }
       };
 
-      rec.onerror = (event: { error: string }) => {
+      rec.onerror = (event) => {
         toast.error(`Speech recognition error: ${event.error}`);
         setRecording(false);
       };
