@@ -30,11 +30,11 @@ async function tryModel(genAI: GoogleGenerativeAI, modelId: string, prompt: stri
         try {
             const result = await session.sendMessage(prompt);
             return { ok: true, model: modelId, text: result.response.text() };
-        } catch (err: any) {
+        } catch (err: unknown) {
             const isRateLimit = err.message?.includes('429') || err.message?.includes('Quota exceeded');
 
             if (isRateLimit && attempt < retries) {
-                let delay = 1000 * Math.pow(2, attempt - 1);
+                const delay = 1000 * Math.pow(2, attempt - 1);
                 console.warn(`${modelId} rate limited (attempt ${attempt}/${retries}). Retrying in ${delay}ms...`);
                 await new Promise(resolve => setTimeout(resolve, delay));
                 continue;

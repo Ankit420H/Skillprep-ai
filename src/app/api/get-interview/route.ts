@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
             .where(eq(MockInterview.mockId, parseResult.data.mockId));
 
         return NextResponse.json(result[0] || null);
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Error fetching interview:", error);
         return NextResponse.json({ error: "Failed to fetch interview" }, { status: 500 });
     }

@@ -32,8 +32,8 @@ export async function POST(req: NextRequest) {
             userAnswers: userAnswers.length > 0 ? userAnswers : []
         }, { status: 200 });
 
-    } catch (err: any) {
-        console.error('Fetch error:', err);
+    } catch (err: unknown) {
+        console.error("Error fetching user data:", err);
         return NextResponse.json({
             error: "Failed to fetch user data",
         }, { status: 500 });

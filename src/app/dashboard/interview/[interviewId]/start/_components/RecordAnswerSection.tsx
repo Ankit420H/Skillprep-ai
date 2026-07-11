@@ -9,7 +9,7 @@ import { MockInterview, Question } from "@/types";
 
 declare global {
   interface Window {
-    webkitSpeechRecognition: any;
+    webkitSpeechRecognition: unknown;
   }
 }
 
@@ -31,7 +31,7 @@ const RecordAnswerSection = ({
   const [loading, setLoading] = useState(false);
   const [recording, setRecording] = useState(false);
   const [webcam, setWebcam] = useState(false);
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<unknown>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined" && "webkitSpeechRecognition" in window) {
@@ -41,7 +41,7 @@ const RecordAnswerSection = ({
       rec.interimResults = true;
       rec.lang = "en-US";
 
-      rec.onresult = (event: any) => {
+      rec.onresult = (event: { resultIndex: number; results: { isFinal: boolean; [key: number]: { transcript: string } }[] }) => {
         let transcript = "";
         for (let i = event.resultIndex; i < event.results.length; ++i) {
           if (event.results[i].isFinal) {
@@ -53,7 +53,7 @@ const RecordAnswerSection = ({
         }
       };
 
-      rec.onerror = (event: any) => {
+      rec.onerror = (event: { error: string }) => {
         toast.error(`Speech recognition error: ${event.error}`);
         setRecording(false);
       };
@@ -131,7 +131,7 @@ const RecordAnswerSection = ({
       setAnswer("");
       if (recognitionRef.current) recognitionRef.current.stop();
       setRecording(false);
-    } catch (error) {
+    } catch {
       toast.error("Failed to save answer");
     } finally {
       setLoading(false);

@@ -38,7 +38,7 @@ const InterviewItemCard = ({ interview }: { interview: MockInterview }) => {
       } else {
         toast.error("Failed to delete interview");
       }
-    } catch (error) {
+    } catch {
       toast.error("An error occurred while deleting");
     }
   };

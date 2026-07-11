@@ -117,7 +117,7 @@ Return only valid JSON (no markdown code fences). Example output:
 
       toast.success("Interview created successfully!", { id: "generating" });
       router.push(`/dashboard/interview/${mockId}`);
-    } catch (error) {
+    } catch {
       toast.error("Failed to generate interview", { id: "generating" });
     } finally {
       setLoading(false);

@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
 
         const result = await db.insert(UserAnswer).values(parseResult.data).returning();
         return NextResponse.json(result[0]);
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Error saving answer:", error);
         return NextResponse.json({ error: "Failed to save answer" }, { status: 500 });
     }

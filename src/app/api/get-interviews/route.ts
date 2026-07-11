@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
             .orderBy(desc(MockInterview.id));
 
         return NextResponse.json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Error fetching interviews:", error);
         return NextResponse.json({ error: "Failed to fetch interviews" }, { status: 500 });
     }

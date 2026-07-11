@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, Button } from '@/components/ui'
+import { Card, CardContent, Button } from '@/components/ui'
 import { ArrowRight, Code, Brain, FileText, Book, Globe, Target, Award, PenTool, Star, ChevronDown, ChevronUp } from 'lucide-react'
 
 interface ResourceLink {
@@ -325,7 +325,7 @@ export default function HomePage() {
                                     <div className="flex items-center gap-1 mb-4 text-yellow-400">
                                         {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
                                     </div>
-                                    <p className="text-slate-600 mb-6 leading-relaxed">"{t.content}"</p>
+                                    <p className="text-slate-600 mb-6 leading-relaxed">&quot;{t.content}&quot;</p>
                                     <div className="flex items-center gap-4">
                                         <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-sm">
                                             {t.avatar}

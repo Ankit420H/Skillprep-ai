@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
             .where(eq(UserAnswer.mockIdRef, parseResult.data.mockId));
 
         return NextResponse.json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Error fetching feedback:", error);
         return NextResponse.json({ error: "Failed to fetch feedback" }, { status: 500 });
     }

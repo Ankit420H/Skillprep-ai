@@ -41,7 +41,7 @@ export async function DELETE(req: NextRequest) {
         await db.delete(MockInterview).where(eq(MockInterview.mockId, validMockId));
 
         return NextResponse.json({ success: true });
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Delete error:", error);
         return NextResponse.json({ error: "Failed to delete interview" }, { status: 500 });
     }

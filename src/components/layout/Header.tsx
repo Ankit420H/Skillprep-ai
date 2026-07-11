@@ -3,7 +3,7 @@ import { SignInButton, UserButton, SignedOut, SignedIn } from "@clerk/nextjs";
 import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Bot } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui";
 import { cn } from "@/core/utils/utils";
 

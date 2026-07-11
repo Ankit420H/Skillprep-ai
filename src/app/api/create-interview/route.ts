@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
         const result = await db.insert(MockInterview).values(data).returning();
         
         return NextResponse.json(result[0]);
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Error creating interview:", error);
         return NextResponse.json({ error: "Failed to create interview" }, { status: 500 });
     }
