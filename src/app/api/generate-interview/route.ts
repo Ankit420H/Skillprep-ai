@@ -31,7 +31,8 @@ async function tryModel(genAI: GoogleGenerativeAI, modelId: string, prompt: stri
             const result = await session.sendMessage(prompt);
             return { ok: true, model: modelId, text: result.response.text() };
         } catch (err: unknown) {
-            const isRateLimit = err.message?.includes('429') || err.message?.includes('Quota exceeded');
+            const errorMessage = err instanceof Error ? err.message : String(err);
+            const isRateLimit = errorMessage.includes('429') || errorMessage.includes('Quota exceeded');
 
             if (isRateLimit && attempt < retries) {
                 const delay = 1000 * Math.pow(2, attempt - 1);
@@ -76,7 +77,7 @@ export async function POST(req: NextRequest) {
             if (result.ok) {
                 return NextResponse.json({ model: result.model, text: result.text });
             }
-            console.warn(`${modelId} failed:`, result.error?.message);
+            console.warn(`${modelId} failed:`, result.error instanceof Error ? result.error.message : String(result.error));
         }
 
         // FALLBACK
